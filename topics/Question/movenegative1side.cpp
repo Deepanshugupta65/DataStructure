@@ -22,7 +22,7 @@ void sort(int *arr , int n){
      
 //  }
 int main(){
-    int arr[] = {2,-3,4,-1,5};
+    int arr[] = {2,-3,4,-1,5};  
     int n = sizeof(arr)/sizeof(arr[0]);
     sort(arr,n);
     // display(arr , n);

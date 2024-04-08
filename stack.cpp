@@ -73,7 +73,7 @@ int main()
     cout << s.pop() << endl;
     cout << s.pop() << endl;
     cout << s.size() << endl;
-    cout << s.isEmpty() << endl;  
+    cout << s.isEmpty() << endl; 
 
 }
 
