@@ -20,7 +20,7 @@ void toggle(string &s){
 }
 
 int main(){
-    string s = "deepANSHU";
+    string s = "uyvyuvKNSN";
     toggle(s);
     for(int i =0;s[i]!='\0';i++){
         cout<<s[i] ;
