@@ -14,7 +14,7 @@ class node {
     }
 };
 
-
+// secodn menthod for insert left and right data
 void buildlevelOrderTraversal(node* &root){
     queue<node*>q;
     cout<<"Enter the root data "<<endl;
@@ -77,6 +77,6 @@ int main(){
     buildlevelOrderTraversal(root);
     cout<<"enter the level order traversal output"<<endl;
     levelOrderTraversal(root);
-  
+    
  return 0; 
 }
