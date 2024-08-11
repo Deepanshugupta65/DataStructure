@@ -13,20 +13,35 @@ class node {
         this->right = NULL;
     }
 };
-// it is first method and second method is buildfromlevelordertrav-
-node* buildTree(node* root){
-    cout<<"Enter the data"<<endl;
+
+
+void buildlevelOrderTraversal(node* &root){
+    queue<node*>q;
+    cout<<"Enter the root data "<<endl;
     int data;
     cin>>data;
     root = new node(data);
-    if(data==-1) return NULL;
-    cout<<"Enter data for inserting  in left"<<endl;
-    root -> left = buildTree(root->left);
-    cout<<"enter data for inserting in right"<<endl;
-    root -> right = buildTree(root->right);
-    return root;
+    q.push(root);
+    while(!q.empty()){
+    node* temp = q.front();
+    q.pop();
+    cout<<"enter the leftnode data "<<temp->data<<endl;
+    int leftdata;
+    cin>>leftdata;
+    if(leftdata!=-1){
+        temp->left = new node(leftdata);
+        q.push(temp->left);
+    }
+    cout<<"enter the rightnode data "<<temp->data<<endl;
+    int rightdata;
+    cin>>rightdata;
+    if(rightdata!=-1){
+        temp->right = new node(rightdata);
+        q.push(temp->right);
+    }
+    }
 }
-// level order traversal it show in tree form  with separator
+
  void levelOrderTraversal(node* root){
     queue<node*> q;
     q.push(root);
@@ -46,7 +61,7 @@ node* buildTree(node* root){
             if(temp->left){
                 q.push(temp->left);
             }
-            if(temp->right){
+            if(temp->right){ 
                 q.push(temp->right);
             }
         }
@@ -54,15 +69,14 @@ node* buildTree(node* root){
 
  }
 
-  
 int main(){
     node* root;
-    root = buildTree(root);
     // level order traversal
     //  3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
+        // root = buildTree(root);
+    buildlevelOrderTraversal(root);
     cout<<"enter the level order traversal output"<<endl;
     levelOrderTraversal(root);
-    // cout<<"output of reverse level order traversal"<<endl; 
-
+  
  return 0; 
 }
