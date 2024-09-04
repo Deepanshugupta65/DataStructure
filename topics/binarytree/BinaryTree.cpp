@@ -53,6 +53,42 @@ node* buildTree(node* root){
     }
 
  }
+
+
+//  reverse level order traversal
+
+void reverseleveltraversal(node* root){
+    vector<vector<int> > ans;
+    if(root==NULL) return ;
+
+    queue<node*> q;
+    q.push(root);
+    while(!q.empty()){
+     int levelSize = q.size(); 
+      vector<int> output;
+        for (int i = 0; i < levelSize; ++i) {
+        node* temp = q.front();
+        q.pop();
+        output.push_back(temp->data);
+        if (temp->left) {
+            q.push(temp->left);
+        }
+        if (temp->right) {
+            q.push(temp->right);
+        }
+       }
+    ans.push_back(output);
+    }
+    reverse(ans.begin(),ans.end());
+    
+     for (const auto& level : ans) {
+        for (int val : level) {
+            cout << val << " ";
+        }
+        cout << endl;  // Print each level on a new line
+    }
+
+}  
 //  inorder traversal by using iterative method
 void inorder(node* root){
     stack<node*> s;
@@ -113,6 +149,38 @@ void postorder(node* root){
         cout<<s<<" ";
     }
 }
+
+void toplevelview(node* root){
+    vector<int> ans;
+    if(root==NULL){
+        return ;
+    }
+    // first map data indicate is horizontal distansce and sencond one is inicate that root data
+    map<int,int> topNode;
+    queue<pair<node*,int> > q;
+    q.push(make_pair(root,0));
+    while(!q.empty()){
+        pair<node*,int> temp = q.front();
+        q.pop();
+        node* frontNode = temp.first;
+        int hd = temp.second;
+        // for bottom view remove topNode == topNode.end conditioin
+        if(topNode.find(hd)==topNode.end()){
+            topNode[hd] = frontNode->data;
+        }
+        if(frontNode->left){
+            q.push(make_pair(frontNode->left,hd-1));
+        }
+        if(frontNode->right){
+            q.push(make_pair(frontNode->right,hd+1));
+        }
+    }
+    for(auto i: topNode){
+        cout<<i.second<<" ";
+    }
+    
+}
+
 int main(){
     node* root;
     root =buildTree(root);
@@ -120,6 +188,8 @@ int main(){
     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
     cout<<"enter the level order traversal output"<<endl;
     levelOrderTraversal(root);
+    cout<<"reverse order traversal"<<endl;
+    reverseleveltraversal(root);
     cout<<"output of inorder iterative method "<<endl; 
     inorder(root);
     cout<<endl;
@@ -128,6 +198,10 @@ int main(){
     cout<<endl;
     cout<<"output of postorder interative method"<<endl;
     postorder(root);
+    cout<<endl;
+    // top level traversal
+    cout<<"output of toplevel traversal"<<endl;
+    toplevelview(root);
 
  return 0; 
 }
