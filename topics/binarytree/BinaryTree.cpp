@@ -80,7 +80,6 @@ void reverseleveltraversal(node* root){
     ans.push_back(output);
     }
     reverse(ans.begin(),ans.end());
-    
      for (const auto& level : ans) {
         for (int val : level) {
             cout << val << " ";
@@ -181,6 +180,13 @@ void toplevelview(node* root){
     
 }
 
+int maximumdepth(node* root){
+   if(root==NULL) return 0;
+   int leftnode = maximumdepth(root->left);
+   int rightnode = maximumdepth(root->right);
+   return max(leftnode,rightnode) + 1;
+}
+
 int main(){
     node* root;
     root =buildTree(root);
@@ -199,9 +205,13 @@ int main(){
     cout<<"output of postorder interative method"<<endl;
     postorder(root);
     cout<<endl;
+    cout<<"maximum indepth of binary tree"<<endl;
+    int ans = maximumdepth(root);
+    cout<<"indepth answaer "<<ans<<endl;
     // top level traversal
     cout<<"output of toplevel traversal"<<endl;
     toplevelview(root);
+
 
  return 0; 
 }

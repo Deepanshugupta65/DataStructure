@@ -64,7 +64,7 @@ void deleteNode(int position , Node* &head){
   delete temp;
   }
   else{
-    // deleting any middle node 
+    // deleting any middle node in the list
     Node* curr = head;
     Node* prev = NULL;
 

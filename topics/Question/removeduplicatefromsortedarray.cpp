@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int removedup(int nums[],int n) {
+ void removedup(int nums[],int n) {
         int j =0;
         // int n = nums.size();
         int temp[n];
@@ -16,10 +16,9 @@ int removedup(int nums[],int n) {
         //       nums[i] = temp[i];
         // }
         // return j;
-         for(int i =0;i<=j;i++){
+         for(int i =0;i<j;i++){
         cout<<temp[i]<<" ";
-        return 0;
-   }
+     }
     }
 int main(){
    int nums[]= {1,1,2,3,3,3,4,5,9,10,10};
@@ -34,31 +33,26 @@ int main(){
 
 
 // by uisng set
-// // Online C++ compiler to run C++ program online
-// #include<bits/stdc++.h>
-// using namespace std;
-// int sort(int arr[],int n){
-//     set<int>st;
-//     for(int i =0;i<n;i++){
-//         st.insert(arr[i]);
-//     }
-//     int index =0;
-//     for(auto it:st){
-//         arr[index] = it;
-//         cout<<arr[index]<<" ";
-//         index++;
-//     }
-//     return index;
-// }
-// int main() {
-//     // Write C++ code here
-//     int arr[] = {1,1,2,2,2,3,3};
-//     int n = 7;
-//     int s =sort(arr,n);
-//     cout<<s<<endl;
+// Online C++ compiler to run C++ program online
+#include<bits/stdc++.h>
+using namespace std;
+void sort(int arr[],int n){
+    set<int>st;
+    for(int i =0;i<n;i++){
+        st.insert(arr[i]);
+    }
+      for(auto i : st){
+      cout<<i <<" ";
+  }
+}
+int main() {
+    // Write C++ code here
+    int arr[] = {1,1,2,2,2,3,3};
+    int n = 7;
+    sort(arr,n);
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 

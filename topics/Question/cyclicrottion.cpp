@@ -1,12 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-// void rotatearray(int arr[] ,int n){
-//     int i=0,j=n-1;
-//     while(i!=j){
-//         swap(arr[i],arr[j]);
-//         i++;
-//     }
-// }
+
 
 void rotatearray(int arr[],int n){
     int temp = arr[0];
