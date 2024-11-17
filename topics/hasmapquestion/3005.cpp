@@ -26,7 +26,7 @@ void count(int arr[],int n){
     cout<<ans<<endl;
 }
 int main(){
-    int arr[] = {1,2,2,3,1,4};
-    int n = 6;
+    int arr[] = {1,2,2,3,1,4 , 2};
+    int n = 7;
     count(arr,n);
 }

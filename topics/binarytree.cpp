@@ -88,6 +88,7 @@ void buildFromLevelOrder(node* &root){
         }
     }
 }
+
 void inorder(node* root){
     // base order
     if(root == NULL){
