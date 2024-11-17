@@ -107,6 +107,29 @@ Node* maxVal(Node* root){
     }
     return temp;
 }
+
+//  find pre and succ 
+void findPreSuc(Node* root, Node* &pre, Node* &suc,int key){
+    Node* curr = root;
+    while(curr!=NULL){
+        if(curr->data<key){
+            pre = curr;
+            curr = curr->right;
+        }
+        else if(curr->data>key){
+            suc = curr;
+            curr = curr ->left;
+        }
+        else{
+               if (curr->left != nullptr)
+                pre = maxVal(curr->left);
+            if (curr->right != nullptr)
+                suc = minVal(curr->right);
+
+            break;
+        }
+    }
+}
 int main() {
     Node* root = NULL;
     cout << "Enter data to create a BST (-1 to stop): " << endl;
@@ -124,6 +147,21 @@ int main() {
     cout<<endl;
     cout<<"min value is "<<minVal(root)->data<<endl;
     cout<<"max value is "<<maxVal(root)->data<<endl;
+    cout<<endl;
+    cout<<"pre and succ "<<endl;
+    int key;
+    cin>>key;
+    Node* pre=NULL;
+    Node* suc = NULL;
+    findPreSuc(root,pre,suc,key);
+     if (pre != nullptr)
+        cout << "Predecessor is: " << pre->data << endl;
+    else
+        cout << "No Predecessor" << endl;
 
+    if (suc != nullptr)
+       cout << "Successor is: " << suc->data << endl;
+    else
+        cout << "No Successor" << endl;
     return 0;
 }
