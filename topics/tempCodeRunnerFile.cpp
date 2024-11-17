@@ -1,24 +1,27 @@
 
-// #include<iostream>
-// using namespace std;
+void inorder(node* root){
+    // base order
+    if(root == NULL){
+        return ;
+    }
+    inorder(root -> left);
+    cout<<root -> data<<" ";
+    inorder(root -> right);
+}
+void preorder(node* root){
+    if(root == NULL){
+        return ;
+    }
+    cout<<root -> data<<endl;
+    preorder(root -> left);
+    preorder(root -> right);
+}
+void postorder(node* root){
+    if(root == NULL){
+        return ;
+    }
+    postorder(root -> left);
+    postorder(root -> right);
+    cout<<root -> data<<" ";
 
-// int pivotele(int arr[], int n){
-//     int s =0 , e = n-1;
-//     int mid = s + (e-s)/2;
-//     while (s<e)
-//     {
-//         /* code */
-//         if(arr[mid]>=arr[0])
-//         s =mid +1;
-//         else
-//         e = mid;
-//         mid = s +(e-s)/2;
-//     }
-//     return s ;
-    
-// }
-
-// int main(){
-//     int arr[5] ={3,8 ,10,17,1};
-//     cout<<"pivot element if"<<pivotele(arr , 5)<<endl; 
-// }
+}
