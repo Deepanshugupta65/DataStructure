@@ -130,6 +130,47 @@ void findPreSuc(Node* root, Node* &pre, Node* &suc,int key){
         }
     }
 }
+Node* deleteFromBST(Node* root ,int key){
+    // base case
+    if(root=NULL){
+        return root;
+    }
+    if(root->data== key){
+    //  o child
+    if(root->left==NULL && root->right==NULL){
+        delete root;
+        return NULL;
+    }
+    // 1 child
+    // left child
+    if(root->left!=NULL && root->right==NULL){
+        Node* temp = root->left;
+        delete root;
+        return temp;
+    }
+    // right child
+    if(root->right!=NULL && root->left==NULL){
+        Node* temp = root->right;
+        delete root;
+        return temp;
+    }
+    // 2 child
+    if(root->left!=NULL && root->right!=NULL){
+        int mini = minVal(root->right)->data;
+        root->data = mini;
+        root->right = deleteFromBST(root->right,mini);
+        return root;
+    }
+    }
+    else if(root->data>key){
+        root ->left = deleteFromBST(root->left,key);
+        return root;
+    }
+    else{
+        root->right = deleteFromBST(root->right,key);
+        return root;
+    }
+}
 int main() {
     Node* root = NULL;
     cout << "Enter data to create a BST (-1 to stop): " << endl;
