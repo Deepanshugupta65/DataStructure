@@ -130,9 +130,10 @@ void findPreSuc(Node* root, Node* &pre, Node* &suc,int key){
         }
     }
 }
+
 Node* deleteFromBST(Node* root ,int key){
     // base case
-    if(root=NULL){
+    if(root==NULL){
         return root;
     }
     if(root->data== key){

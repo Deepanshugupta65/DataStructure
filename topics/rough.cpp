@@ -1,123 +1,115 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
 
-class node{
-    public:
+class Node{
+    public :
     int data;
-    node* left;
-    node* right;
-    node(int data){
-        this->data = data;
+    Node*left;
+    Node*right;
+    
+    Node(int d){
+        this->data = d;
         this->left = NULL;
-        this ->right = NULL;
+        this->right = NULL;
     }
 };
-
-node* buildtree(node* root){
-    cout<<"Enter the data"<<endl;
+Node* insertBST(Node* root,int data){
+   if(root==NULL){
+    return new Node(data);
+   }
+   if(data >root->data){
+    root->right = insertBST(root->right,data);
+   }
+   else{
+    root->left = insertBST(root->left,data);
+   }
+   return root;
+}
+void takeinput(Node* &root){
     int data;
     cin>>data;
-    root = new node(data);
-    if(data==-1) return NULL;
-    cout<<"enter the data for left"<<root->data<<endl;
-    root->left =buildtree(root->left);
-    cout<<"enter the data for right"<<root->data<<endl;
-    root->right = buildtree(root->right);
-    return root;
+    while(data != -1){
+       root = insertBST(root,data);
+       cin>>data;
+    }
 }
-void levelordertraversal(node* root){
-    queue<node*>q;
+// inoder 
+void inorder(Node* root){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+void levelOrderTraversal(Node* root) {
+    if (root == NULL) return;
+
+    queue<Node*> q;
     q.push(root);
     q.push(NULL);
-    while(!q.empty())
-    {
-    node* temp = q.front();
-    q.pop();
-    if(temp==NULL){
-        cout<<endl;
-        if(!q.empty()){
-            q.push(NULL);
-        }
-    }
-    else{
-        cout<<temp->data<<" ";
-        if(temp->left){          
-            q.push(temp->left);
-        }
-        if(temp->right){
-            q.push(temp->right);
-        }
-    }
-    }
-}
 
-void inorder(node* root){
-    stack<node*>st;
-    node* curr = root;
-    while(!st.empty()){
-        if(curr!=NULL){
-            st.push(curr);
-            curr=curr->left;
-        }
-        else{
-            node* curr = st.top();
-            st.pop();
-            cout<<curr->data<<" ";
-            curr = curr ->right;
+    while (!q.empty()) {
+        Node* temp = q.front();
+        q.pop();
+
+        if (temp == NULL) {
+            cout << endl;
+            if (!q.empty()) {
+                q.push(NULL);
+            }
+        } else {
+            cout << temp->data << " ";
+            if (temp->left) {
+                q.push(temp->left);
+            }
+            if (temp->right) {
+                q.push(temp->right);
+            }
         }
     }
 }
- void preorder(node* root){
-    stack<node*>s;
-    node* curr = root;
-    s.push(curr);
-    while(!s.empty()){
-        curr = s.top();
-        s.pop();
-        cout<<curr->data<<" ";
-        if(curr->right!=NULL){
-            s.push(curr->right);
-        }
-        if(curr->left!=NULL){
-            s.push(curr->left);
-        }
+// deletion in bst
+Node* deletion(Node* root,int key){
+     
+     if(root==NULL){
+        return root;
+     }
+     if(root->data==key){
+    //   0 child
+    if(root->left==NULL && root->right==NULL){
+        delete root;
+        return NULL;
     }
- } 
-void postorder(node* root){
-    vector<int> postorder;
-    if(root==NULL) return ;
-    node* curr = root;
-    stack<node*> st1,st2;
-    st1.push(curr);
-    while(!st1.empty()){
-        curr = st1.top();
-        st1.pop();
-        st2.push(curr);
-        if(curr->left != NULL){
-            st1.push(curr->left);
-        }
-          if(curr->right != NULL){
-            st1.push(curr->right);
-        }
+    // 1 child
+     if(root->left==NULL && root->right!=NULL){
+        Node* temp = root->right;
+        delete root;
+        return temp;
     }
-    while(!st2.empty()){
-        postorder.push_back(st2.top()->data);
-        st2.pop();
+    if(root->left!=NULL && root->right==NULL){
+          Node* temp = root->left;
+          delete root;
+          return temp;
     }
-    for(auto s:postorder){
-        cout<<s<<" ";
-    }
+    // 2 child
+    
+     }
+     else if(key>root->data){
+        root->right = deletion(root->right,key);
+     }
+     else{
+        root->left = deletion(root->left,key);
+     }
+    //  
 }
-// 1 2 4 -1 -1 5 6 -1 -1 7 -1 -1 3 -1 8 9 -1 -1 -1
 int main(){
-    node* root ;
-    root = buildtree(root);
-    // level order traversal
-    levelordertraversal(root);
-    cout<<"inorder output"<<endl;
+    Node* root = NULL;
+    cout<<"enter the data "<<endl;
+    takeinput(root);
+    cout<<" outptut of tree"<<endl;
+    levelOrderTraversal(root);
+    cout<<endl;
     inorder(root);
-    cout<<"preorder output"<<endl;
-    preorder(root);
-    cout<<"postorder output "<<endl;
-    postorder(root);
 }
